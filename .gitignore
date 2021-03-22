@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.env.dev
+public/videos/*
+public/files/*
+public/photos/*
+
+# docs
+jsdoc/docs
