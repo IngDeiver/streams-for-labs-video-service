@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import UserRouter from './user.route';
+import VideoRouter from './video.route';
 
 const router = Router();
 const prefix: string = '/api';
 
-router.use(`${prefix}/user`, UserRouter);
+router.use(`${prefix}/video`, VideoRouter);
 
 export default router;

@@ -1,6 +1,6 @@
-import UserService from './UserService';
+import VideoService from './VideoService';
 
 export {
   // eslint-disable-next-line import/prefer-default-export
-  UserService,
+  VideoService,
 };
