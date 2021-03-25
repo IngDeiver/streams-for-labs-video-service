@@ -6,15 +6,12 @@ export const queryVault = (uri: string) => {
 
   return new Promise((resolve, reject) => {
     const options = {
-      port: 80,
-      host: process.env.VAULT_HOST,
-      path: uri,
       headers:{
         'Authorization': `Bearer ${TOKEN}`
       }
     }
   
-    http.get(options, response => {
+    http.get(`${process.env.VAULT_HOST}${uri}`, options, response => {
       let body = '';
     
       response.on('data',chunk => {
