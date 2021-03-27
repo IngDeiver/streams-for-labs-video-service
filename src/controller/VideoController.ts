@@ -6,7 +6,7 @@ import { HttpException } from "../exceptions";
 import { VideoService } from "../services";
 import path from "path";
 import fs from "fs";
-import { decryptFile, decryptVideo } from "../utils/encrypt";
+import { decryptVideo } from "../utils/encrypt";
 var stream = require('stream');
 
 /**
