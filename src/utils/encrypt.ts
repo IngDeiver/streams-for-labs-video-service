@@ -30,20 +30,20 @@ export const decryptVideo = async (
   res: Response
 ) => {
   const file = await decryptFile(path);
-  const videoSize = file.length
 
   if (range) {
     console.log("Rang: ", range);
     
-    const parts = range.replace(/bytes=/, "").split("-")
-    const start = parseInt(parts[0], 10)
-    const end = parts[1] 
-      ? parseInt(parts[1], 10)
-      : videoSize-1
-    const contentLength = (end-start)+1
+    const size = file.length;
+    const CHUNK_SIZE = 10 ** 6; // 1MB
+    const start = Number(range.replace(/\D/g, ""));
+    const end = Math.min(start + CHUNK_SIZE, size - 1);
 
+   
+      const contentLength = end - start + 1;
+      
       const headers = {
-        "Content-Range": `bytes ${start}-${end}/${videoSize}`,
+        "Content-Range": `bytes ${start}-${end}/${size}`,
         "Accept-Ranges": "bytes",
         "Content-Length": contentLength,
         "Content-Type": "video/mp4",
