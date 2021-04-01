@@ -39,10 +39,7 @@ export const decryptVideo = async (
     const start = Number(range.replace(/\D/g, ""));
     const end = Math.min(start + CHUNK_SIZE, size - 1);
 
-    if (start >= size - 1 || end >= size - 1) {
-      console.log("Star or end are big");
-      res.send(file);
-    } else {
+    
       // Create headers
       const contentLength = end - start + 1;
       const headers = {
@@ -59,7 +56,7 @@ export const decryptVideo = async (
 
       res.writeHead(206, headers);
       readable.pipe(res);
-    }
+    
   } else {
     console.log("No range");
     res.send(file);
