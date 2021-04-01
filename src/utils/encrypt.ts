@@ -32,12 +32,15 @@ export const decryptVideo = async (
   const file = await decryptFile(path);
 
   if (range) {
+    console.log("Rang: ", range);
+    
     const size = file.length;
     const CHUNK_SIZE = 10 ** 6; // 1MB
     const start = Number(range.replace(/\D/g, ""));
     const end = Math.min(start + CHUNK_SIZE, size - 1);
 
     if (start >= size - 1 || end >= size - 1) {
+      console.log("Star or end are big");
       res.send(file);
     } else {
       // Create headers
@@ -58,6 +61,7 @@ export const decryptVideo = async (
       readable.pipe(res);
     }
   } else {
+    console.log("No range");
     res.send(file);
   }
 };
