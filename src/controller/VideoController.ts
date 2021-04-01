@@ -83,10 +83,7 @@ class VideoController {
       if (!video) throw new HttpException(404, "Video not found");
 
       const location = video.path;
-
-      // get video stats
-      const videoSize = fs.statSync(location).size;
-      decryptVideo(location, range, res, videoSize);
+      decryptVideo(location, range, res);
 
     } catch (error) {
       return next(new HttpException(error.status || 500, error.message));
