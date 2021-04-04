@@ -14,5 +14,7 @@ interface   IVideo extends Document{
     upload_at: Date,
     author: string,
     shared_users: Array<mongoose.Types.ObjectId>,
+    type: String,
+    sync: Boolean,
 }
 export default  IVideo;

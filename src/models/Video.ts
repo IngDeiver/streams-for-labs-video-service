@@ -8,6 +8,8 @@ const VideoSchema: Schema<IVideo> = new Schema({
     upload_at: {type: Date, required: true},
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true},
     shared_users: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    type: { type: String, required: true },
+    sync: { type: Boolean, default: false },
 });
 
 
