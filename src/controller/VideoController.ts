@@ -90,6 +90,33 @@ class VideoController {
     }
   }
 
+
+/**
+   *
+   * Remove Video synced by id 
+   * @static
+   * @param {Request} req - The request
+   * @param {Response} res - The response
+   * @param {NextFunction} next - The next middleware in queue
+   * @return {JSON} - A Video removed
+   * @memberof VideoController
+   */
+ public static async removeVideoSyncedByPath(req: Request, res: Response, next: NextFunction) {
+  try {
+    const {author } = req.params;
+    const { pathToRemove } = req.body
+    
+      const file: IVideo | null = await VideoService.removeByPath(pathToRemove);
+      if (!file) throw new HttpException(404, 'Video not found');
+      if( author != file.author) throw new HttpException(403, 'Forbidden: The file is not his authorship.');
+      console.log(`Video ${file.name} deleted`);
+      res.sendStatus(200)
+  } catch (error) {
+    console.log(error);
+    return next(new HttpException(error.status || 500, error.message));
+  }
+}
+
   /**
    *
    * Remove Video by id

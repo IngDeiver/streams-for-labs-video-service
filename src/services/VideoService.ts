@@ -32,6 +32,30 @@ class VideoService implements ICrud<IVideo, string> {
     return VideoRepository.list();
   }
 
+
+ /**
+   *
+   * Find by path a Video
+   * @param {string} path - The path to find
+   * @return {Promise<IVideo>}  A Video
+   */
+  async getByPath(path: string): Promise<IVideo| null> {
+    return VideoRepository.getByPath(path);
+  }
+
+     /**
+   *
+   * Remove by path a video synced
+   * @param {string} path - The path to find
+   * @return {Promise<IVideo>}  A Video removed
+   * @memberof FileService
+   */
+      async removeByPath(path: string): Promise<IVideo| null> {
+        const taskToDelete = await this.getByPath(path);
+        if (taskToDelete) await taskToDelete.remove();
+        return taskToDelete;
+      }
+
   /**
    *
    * Find by id a Video
@@ -105,7 +129,7 @@ class VideoService implements ICrud<IVideo, string> {
    /**
    *
    *
-   * @return {Promise<IPhoto>} Share Video with a user
+   * @return {Promise<IVideo>} Share Video with a user
    * @memberof VideoService
    */
     async shareVideoWithUser(userToShare: string, _id: String): Promise<IVideo | null> {

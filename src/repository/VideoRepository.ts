@@ -69,6 +69,18 @@ class VideoRepository implements ICrud<IVideo, string> {
     return VideoToDelete;
   }
 
+
+ /**
+   *
+   *
+   * @param {string} path - The path to find
+   * @return {Promise<IVideo>}  A Video
+   * @memberof Videoepository
+   */
+  async getByPath(path: string): Promise<IVideo | null> {
+    return Video.findOne({ path });
+  }
+
   /**
    *
    *
@@ -117,7 +129,7 @@ class VideoRepository implements ICrud<IVideo, string> {
   /**
    *
    *
-   * @return {Promise<IPhoto>} Share Video with a user
+   * @return {Promise<Video>} Share Video with a user
    * @memberof VideoRepository
    */
    async shareVideoWithUser(userToShare: string, _id: String): Promise<IVideo | null> {
@@ -127,7 +139,7 @@ class VideoRepository implements ICrud<IVideo, string> {
   /**
    *
    *
-   * @return {Promise<Array<IPhoto>>} List videos
+   * @return {Promise<Array<Video>>} List videos
    * @memberof VideoRepository
    */
   async getVideos(author: string): Promise<Array<IVideo>> {
