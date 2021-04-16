@@ -35,6 +35,8 @@ class VideoController {
       );
       res.json([...ownVideos, ...sharedVideos]);
     } catch (error) {
+      console.log("Lis error: ", error);
+      
       return next(new HttpException(error.status || 500, error.message));
     }
   }
